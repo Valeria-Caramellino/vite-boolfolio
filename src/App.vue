@@ -1,7 +1,7 @@
 <script>
-import axios from "axios"
+import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue'
-
+import AppFooter from './components/AppFooter.vue';
 export default{
   data(){
     return{
@@ -10,19 +10,18 @@ export default{
    
   }, 
   components: {
-      AppMain
+    AppHeader,  
+    AppMain,
+    AppFooter
+
     }
 }
 </script>
 
 <template>
-  <header>
-    testata
-  </header>
+    <AppHeader/>
     <AppMain />
-  <footer>
-    footer
-  </footer>
+    <AppFooter />
  
 </template>
 

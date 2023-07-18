@@ -79,16 +79,16 @@ export default{
     <div class="container">
         <div class="row">
             <div class="col-12">
-               <h1>Elenco Projects</h1>
+               <h2>Elenco Projects</h2>
                 <h4 v-if="totPageProjects>0">Pagina {{ indexPageProjects }} di {{ totPageProjects }}</h4>
                 <h3 v-if="loading">Caricamento in corso</h3>
                 <h3 v-if="loadingError" class="text-danger">{{ loadingError }}</h3>
             </div>
         </div>
         <hr>
-        <div class="row justify-content-between my-3">
+        <div class="row flex-wrap justify-content-around my-3">
 
-            <div class="border col-5 my-2 text-center rounded bg-secondary" v-for="item in projects">
+            <div class="border col-5 my-3 text-center rounded bg-secondary" v-for="item in projects">
                 <h4>Title: {{ item.title }}</h4>
                 <h3>Type: {{ item.type ? item.type.name : "Nessun Tipe usato" }}</h3>
                 <p>Content:{{ item.content }}</p>
