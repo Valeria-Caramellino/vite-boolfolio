@@ -76,40 +76,49 @@ export default{
 
 <template>
 <main>
-    <h3>corpo della pagina</h3>
-    <h4 v-if="totPageProjects>0">Pagina {{ indexPageProjects }} di {{ totPageProjects }}</h4>
-    <h3 v-if="loading">Caricamento in corso</h3>
-    <h3 v-if="loadingError">{{ loadingError }}</h3>
-    <hr>
-    <div v-for="item in projects">
-        <h4>title: {{ item.title }}</h4>
-        <h3>type: {{ item.type ? item.type.name : "Nessun Tipe usato" }}</h3>
-        <p> content:{{ item.content }}</p>
-       <p>tecnologies: 
-        <span v-for="item in item.tecnologies">{{ item.name }}</span>
-        <span v-if="item.tecnologies.length == 0">A\N</span>
-        </p>
-    
-        <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+               <h1>Elenco Projects</h1>
+                <h4 v-if="totPageProjects>0">Pagina {{ indexPageProjects }} di {{ totPageProjects }}</h4>
+                <h3 v-if="loading">Caricamento in corso</h3>
+                <h3 v-if="loadingError" class="text-danger">{{ loadingError }}</h3>
+            </div>
+        </div>
         <hr>
+        <div class="row justify-content-between my-3">
 
+            <div class="border col-5 my-2 text-center rounded bg-secondary" v-for="item in projects">
+                <h4>Title: {{ item.title }}</h4>
+                <h3>Type: {{ item.type ? item.type.name : "Nessun Tipe usato" }}</h3>
+                <p>Content:{{ item.content }}</p>
+                <template v-if="item.tecnologies.length > 0">
+                <p>Tecnologies: 
+                    <span v-for="item in item.tecnologies">{{ item.name }}&ensp;</span>
+                </p>
+                </template>
+                
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col-8 mx-auto d-flex justify-content-between">
+                <a class="btn btn-secondary" @click="getProjectPrevPage">Pagina Prev</a>
+                <a class="btn btn-secondary mx-2 col-1" @click="getProjectsPage(numPage)" v-for="numPage in totPageProjects ">{{ numPage }}</a>
+                <a class="btn btn-secondary" @click="getProjectNextPage">Pagina next</a>
+            </div>
+             
+        </div>
     </div>
+    
+    
+   
+    
 
-    <a class="btn btn-primary" @click="getProjectPrevPage">Pagina Prev</a>
-    <a class="btn btn-primary mx-2" @click="getProjectsPage(numPage)" v-for="numPage in totPageProjects ">{{ numPage }}</a>
-    <a class="btn btn-primary" @click="getProjectNextPage">Pagina next</a>
+    
 </main>
 </template>
 
 <style lang="scss" scoped>
-    main{
-        
-        margin: 3rem;
-        h3{
-            margin-bottom: 2rem;
-        }
-        h4{
-            margin: 2rem 0;
-        }
-    }
+    
 </style>
