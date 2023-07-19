@@ -28,6 +28,9 @@ export default{
             }).catch(err=> {
                 this.loading = false;
                 this.loadingError = "Errore nel caricamento " + err.message;
+                this.$router.push({
+                    name:'error', params: {code:404}
+                });
                 //console.error(err);
             })
         },
