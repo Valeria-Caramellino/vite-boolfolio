@@ -1,39 +1,38 @@
 <script>
 import axios from "axios";
+import {store} from '../store';
 
 export default{
     name:"AppProjectList",
     data(){
         return{
-            apiUrl:"http://127.0.0.1:8000/api/",
-            projectApi:"projects",
-            loading:false,
-            loadingError: false,
+
+            store,
             projects:[],
             indexPageProjects: 0,
             totPageProjects : 0,
+
         }
     },
     
     methods:{
         getProject(){
-            this.loading = true;
+            this.store.loading = true;
 
-            axios.get(this.apiUrl + this.projectApi).then((r) => {
+            axios.get(this.store.apiUrl + this.store.projectApi).then((r) => {
             
-                this.projects = r.data.results.data;/**metto i dati nell'array */
-                this.indexPageProjects = r.data.results.current_page;//popolo dati
-                this.totPageProjects = r.data.results.last_page;//popolo dati
-                //console.log(r.data.results.last_page);
-                //console.log(this.projects);
-                this.loading = false
+                this.projects = r.data.results.data;
+                this.indexPageProjects = r.data.results.current_page;
+                this.totPageProjects = r.data.results.last_page;
+                
+                this.store.loading = false
             }).catch(err=> {
-                this.loading = false;
-                this.loadingError = "Errore nel caricamento " + err.message;
+                this.store.loading = false;
+                this.store.loadingError = "Errore nel caricamento " + err.message;
                 this.$router.push({
                     name:'error', params: {code:404}
                 });
-                //console.error(err);
+               
             })
         },
         getProjectsPage(PagNum){
@@ -46,19 +45,19 @@ export default{
                     }
                 };
 
-                this.loading=true;
-                axios.get(this.apiUrl + this.projectApi, config).then((r) => {
+                this.store.loading=true;
+                axios.get(this.store.apiUrl + this.store.projectApi, config).then((r) => {
                     
-                    this.projects = r.data.results.data;/**metto i dati nell'array */
-                    this.indexPageProjects = r.data.results.current_page;//popolo
-                    this.totPageProjects = r.data.results.last_page;//popolo dati
-                    //console.log(r.data.results.data);
-                    //console.log(this.projects);
-                    this.loading = false
+                    this.projects = r.data.results.data;
+                    this.indexPageProjects = r.data.results.current_page;
+                    this.totPageProjects = r.data.results.last_page;
+
+                    this.store.loading = false
                 }).catch(err=> {
-                    this.loading = false;
-                    this.loadingError = "Errore nel caricamento " + err.message;
-                    console.error(err);
+                    
+                    this.store.loading = false;
+                    this.store.loadingError = "Errore nel caricamento " + err.message;
+                   
                 })
             }else {
                 console.error('non ci sono piu pagine');
@@ -86,8 +85,8 @@ export default{
             <div class="col-12">
                <h2>Elenco Projects</h2>
                 <h4 v-if="totPageProjects>0">Pagina {{ indexPageProjects }} di {{ totPageProjects }}</h4>
-                <h3 v-if="loading">Caricamento in corso</h3>
-                <h3 v-if="loadingError" class="text-danger">{{ loadingError }}</h3>
+                <h3 v-if="store.loading">Caricamento in corso</h3>
+                <h3 v-if="store.loadingError" class="text-danger">{{ store.loadingError }}</h3>
             </div>
         </div>
         <hr>

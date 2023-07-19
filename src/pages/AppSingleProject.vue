@@ -1,40 +1,41 @@
 <script>
 import axios from "axios";
+import {store} from '../store';
 
 export default{
     nome:'AppSingleProject',
     data(){
         return{
-            apiUrl:"http://127.0.0.1:8000/api/",
-            projectApi:"projects/",
-            loading:false,
-            loadingError: false,
+            store,
             projects:null,
-            
         }
     },
    
     methods:{
         getProject(id){
-            this.loading = true;
+            this.store.loading = true;
 
-            axios.get(this.apiUrl + this.projectApi + id).then((r) => {
+            axios.get(this.store.apiUrl + this.store.projectApi + id).then((r) => {
             
                 this.projects = r.data.results;
-               
-                this.loading = false
+                this.store.loading = false
+
             }).catch(err=> {
-                this.loading = false;
-                this.loadingError = "Errore nel caricamento " + err.message;
+
+                this.store.loading = false;
+                this.store.loadingError = "Errore nel caricamento " + err.message;
+
                 this.$router.push({
                     name:'error', params: {code:404}
                 });
-                //console.error(err);
+
             })
         },
     },
     mounted(){
+
         this.getProject(this.$route.params.id);
+
     }
 
 }
@@ -55,15 +56,15 @@ export default{
                     <h4>Title: {{ projects.title }}</h4>
                     <h3>Type: {{ projects.type ? projects.type.name : "Nessun Tipe usato" }}</h3>
                     <p>Content:{{ projects.content }}</p>
+
                     <template v-if="projects.tecnologies.length > 0">
                         <p>Tecnologies: 
                             <span v-for="projects in projects.tecnologies">{{ projects.name }}&ensp;</span>
                         </p>
                     </template>
-                    <div>
-                       <img :src="'http://127.0.0.1:8000/storage/'+ projects.image" :alt="projects.title"> 
-                    </div>
-                    
+
+                    <img :src="this.store.imgApi + projects.image" :alt="projects.title"> 
+                                        
                 </div>
 
             </template> 
@@ -75,6 +76,7 @@ export default{
 </template>
 
 <style lang="scss" scoped>
+
 img{
     width: 100%;
     height: 20rem;
