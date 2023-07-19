@@ -60,9 +60,12 @@ export default{
                             <span v-for="projects in projects.tecnologies">{{ projects.name }}&ensp;</span>
                         </p>
                     </template>
-                
+                    <div>
+                       <img :src="'http://127.0.0.1:8000/storage/'+ projects.image" :alt="projects.title"> 
+                    </div>
+                    
                 </div>
-                
+
             </template> 
 
         </div>
@@ -72,5 +75,11 @@ export default{
 </template>
 
 <style lang="scss" scoped>
-
+img{
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 1rem;
+}
 </style>
