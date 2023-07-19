@@ -32,13 +32,11 @@ export default{
             </div>
             <div class="row bg-black">
                 <div class="col-12 d-flex justify-content-evenly py-3">
+
                     <template v-for="item in navLinks">
-                        <router-link :to="{name: item.name}">{{ item.label }}</router-link>
+                        <router-link :to="{name: item.name}" class="btn btn-secondary">{{ item.label }}</router-link>
                     </template>
                     
-                    <!--
-                    <a class="btn btn-secondary mx-2" href="/">Home</a>
-                    <a class="btn btn-secondary mx-2" href="/projects">List Projects</a>-->
                 </div>
             </div>
         </div>
