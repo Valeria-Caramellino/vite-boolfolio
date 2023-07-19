@@ -4,7 +4,7 @@ export default{
     name:"AppFooter",
     data(){
         return{
-            title:"Sezione Footer"
+            title:"Grazie per la Visione"
         }
     },
     methods:{
