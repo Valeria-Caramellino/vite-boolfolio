@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+
 export default{
     name:"AppProjectList",
     data(){
@@ -13,6 +14,7 @@ export default{
             totPageProjects : 0,
         }
     },
+    
     methods:{
         getProject(){
             this.loading = true;
@@ -90,17 +92,19 @@ export default{
         </div>
         <hr>
         <div class="row flex-wrap justify-content-around my-3">
-
+            
             <div class="border col-5 my-3 text-center rounded bg-secondary" v-for="item in projects">
+                <router-link :to="{ name:'single', params: {id:item.id}}">
                 <h4>Title: {{ item.title }}</h4>
                 <h3>Type: {{ item.type ? item.type.name : "Nessun Tipe usato" }}</h3>
-                <p>Content:{{ item.content }}</p>
+                <p>Content: {{ item.content }}</p>
                 <template v-if="item.tecnologies.length > 0">
-                <p>Tecnologies: 
-                    <span v-for="item in item.tecnologies">{{ item.name }}&ensp;</span>
-                </p>
+                    <p>Tecnologies: 
+                        <span v-for="item in item.tecnologies">{{ item.name }}&ensp;</span>
+                    </p>
                 </template>
-                
+                <h4>Maggiori info</h4>
+                </router-link>
             </div>
         </div>
 
@@ -123,5 +127,15 @@ export default{
 </template>
 
 <style lang="scss" scoped>
+div.border{
+    &:hover{
+        transform: scale(1.1);      
+    }
+
+    a{
+        text-decoration: none;
+        color: black;
+    }
+}
     
 </style>
