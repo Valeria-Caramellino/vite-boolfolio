@@ -29,6 +29,7 @@ export default{
             }).catch(err=> {
                 this.store.loading = false;
                 this.store.loadingError = "Errore nel caricamento " + err.message;
+
                 this.$router.push({
                     name:'error', params: {code:404}
                 });
@@ -57,6 +58,9 @@ export default{
                     
                     this.store.loading = false;
                     this.store.loadingError = "Errore nel caricamento " + err.message;
+                    this.$router.push({
+                    name:'error', params: {code:404}
+                });
                    
                 })
             }else {
