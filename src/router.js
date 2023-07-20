@@ -28,7 +28,6 @@ const router = createRouter({
             name :'single',
             component: AppSingleProject
         }
-        
     ]
 });
 export {router};
