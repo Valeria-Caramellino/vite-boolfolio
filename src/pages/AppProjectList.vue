@@ -24,7 +24,7 @@ export default{
                 this.projects = r.data.results.data;
                 this.indexPageProjects = r.data.results.current_page;
                 this.totPageProjects = r.data.results.last_page;
-                
+                console.log(r);
                 this.store.loading = false
             }).catch(err=> {
                 this.store.loading = false;
@@ -52,7 +52,7 @@ export default{
                     this.projects = r.data.results.data;
                     this.indexPageProjects = r.data.results.current_page;
                     this.totPageProjects = r.data.results.last_page;
-
+                    
                     this.store.loading = false
                 }).catch(err=> {
                     

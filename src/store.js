@@ -6,4 +6,5 @@ export const store = reactive({
     imgApi:"http://127.0.0.1:8000/storage/",
     loading:false,
     loadingError: false,
+    totProjects:0
 })
