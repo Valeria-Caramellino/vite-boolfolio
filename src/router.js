@@ -4,6 +4,7 @@ import AppHome from './pages/AppHome.vue';
 import AppProjectList from './pages/AppProjectList.vue';
 import AppError from './pages/AppError.vue';
 import AppSingleProject from './pages/AppSingleProject.vue';
+import AppList from './pages/AppList.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -27,6 +28,11 @@ const router = createRouter({
             path:'/projects/:id',
             name :'single',
             component: AppSingleProject
+        },
+        {
+            path: '/projects/list',
+            name: 'list',
+            component :AppList
         }
     ]
 });

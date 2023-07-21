@@ -9,7 +9,8 @@ export default{
             title: "Vite-Boolfolio",
             navLinks:[
                 {label: "Home", name:"home"},
-                {label: "Projects", name:"projects"}
+                {label: "Projects", name:"projects"},
+                {label : "List", name : "list"}
             ]
         };
     },
