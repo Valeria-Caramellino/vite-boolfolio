@@ -7,7 +7,8 @@ export default{
         return{
             store,
             listProjects: [],
-            listApi: "list"
+            listApi: "list",
+            filterText :"",
         }
     },
     methods:{
@@ -38,17 +39,32 @@ export default{
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-12">
-               <h2>Elenco Projects</h2>
-                <h3 v-if="store.loading">Caricamento in corso</h3>
-                <h3 v-if="store.loadingError" class="text-danger">{{ store.loadingError }}</h3>
+            <div class="col-12 d-flex justify-content-between">
+
+                <div class="col-5">
+                    <h2>Elenco Projects</h2>
+                    <h3 v-if="store.loading">Caricamento in corso</h3>
+                    <h3 v-if="store.loadingError" class="text-danger">{{ store.loadingError }}</h3> 
+                </div>
+                <div class="col-4 text-end">
+                    <label for="search">Cerca </label>
+                    <input type="text" placeholder="Cerca progetto" class="my-2" name="search" v-model=" filterText">
+               </div>
+
             </div>
         </div>
         <div class="row justify-content-around flex-wrap">
-            <div class="col-4 mx-1 my-2 card d-flex align-items-center justify-content-center bg-secondary text-light" v-for="item in listProjects">
-                    <h4>Titolo: <span>{{ item.title }} </span> </h4>
-                    <router-link :to="{name:'single', params: {id:item.id}}">Info</router-link>
-            </div>
+
+            <template v-for="item in listProjects">
+                <template v-if="item.title.toLowerCase().includes(filterText)">
+                    <div class="col-4 mx-1 my-2 card d-flex align-items-center justify-content-center bg-secondary text-light">
+                
+                        <h4>Titolo: <span>{{ item.title }} </span> </h4>
+                        <router-link :to="{name:'single', params: {id:item.id}}">Info</router-link>
+                    </div>
+                </template>
+            </template>
+            
         </div>
     </div>
 </template>
@@ -62,4 +78,5 @@ span{
 a{
     color: white;
 }
+
 </style>
