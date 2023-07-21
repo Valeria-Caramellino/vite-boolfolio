@@ -47,7 +47,7 @@ export default{
                     <h3 v-if="store.loadingError" class="text-danger">{{ store.loadingError }}</h3> 
                 </div>
                 <div class="col-4 text-end">
-                    <label for="search">Cerca </label>
+                    <label for="search" class="mx-3">Cerca </label>
                     <input type="text" placeholder="Cerca progetto" class="my-2" name="search" v-model=" filterText">
                </div>
 
